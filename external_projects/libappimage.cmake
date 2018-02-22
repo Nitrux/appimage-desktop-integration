@@ -18,6 +18,11 @@ set(libappimage_INCLUDE_DIRECTORIES ${AppImageKit_INSTALL_DIR}${CMAKE_INSTALL_PR
 
 
 add_library(libappimage SHARED IMPORTED)
-set_property(TARGET libappimage PROPERTY IMPORTED_LOCATION ${libappimage_PATH})
-set_property(TARGET libappimage PROPERTY INCLUDE_DIRECTORIES ${libappimage_INCLUDE_DIRECTORIES})
+
+set_target_properties(libappimage PROPERTIES
+    IMPORTED_LOCATION ${libappimage_PATH}
+    INCLUDE_DIRECTORIES ${libappimage_INCLUDE_DIRECTORIES}
+    INTERFACE_LINK_LIBRARIES "glib-2.0"
+    )
+
 add_dependencies(libappimage AppImageKit)

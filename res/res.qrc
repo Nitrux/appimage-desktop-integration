@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>anim/loading.gif</file>
+        <file>images/appimage.svg</file>
+        <file>images/dialog-information.svg</file>
+        <file>images/application-x-executable.svg</file>
+        <file>images/document-download.svg</file>
+    </qresource>
+</RCC>
