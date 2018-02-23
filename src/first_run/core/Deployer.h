@@ -21,6 +21,9 @@ signals:
     void failDeploy();
 
 public slots:
+    void trustAppimage(const QString &path);
+    void untrustAppimage(const QString &path);
+
     void deployUserwide(const QString &path);
     void deploySystemwide(const QString &path);
     void cancelDeploy();

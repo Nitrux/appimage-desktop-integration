@@ -58,6 +58,11 @@ void UiController::handleUnsignedAppimage(const QString &path)
     connect(&unsecureAppimageDialog, &UnsecureAppimageDialog::run,
             this, &UiController::handleRun);
 
+    connect(&unsecureAppimageDialog, &UnsecureAppimageDialog::trust,
+            deployer, &Deployer::trustAppimage);
+    connect(&unsecureAppimageDialog, &UnsecureAppimageDialog::untrust,
+            deployer, &Deployer::untrustAppimage);
+
     connect(deployer, &Deployer::deploying,
             this, &UiController::handleDeploying);
 }

@@ -56,7 +56,7 @@ void UnsecureAppimageDialog::setAppimage(const QString &path)
 
 void UnsecureAppimageDialog::on_runButton_clicked()
 {
-    emit runIsolated(path);
+    emit run(path);
 }
 
 void UnsecureAppimageDialog::on_closeButton_clicked()
@@ -67,4 +67,13 @@ void UnsecureAppimageDialog::on_closeButton_clicked()
 void UnsecureAppimageDialog::on_deployButton_clicked()
 {
     emit deployUserwide(path);
+}
+
+void UnsecureAppimageDialog::on_checkBox_toggled(bool checked)
+{
+    ui->runButton->setEnabled(checked);
+    if (checked)
+        emit trust(path);
+    else
+        emit untrust(path);
 }

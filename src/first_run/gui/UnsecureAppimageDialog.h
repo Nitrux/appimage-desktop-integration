@@ -24,6 +24,11 @@ signals:
     void deploySystemwide(const QString &path);
     void run(const QString &path);
     void runIsolated(const QString &path);
+    void trust(const QString &path);
+    void untrust(const QString &path);
+
+private slots:
+    void on_checkBox_toggled(bool checked);
 
 private slots:
     void on_deployButton_clicked();
