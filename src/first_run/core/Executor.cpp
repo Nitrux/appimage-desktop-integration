@@ -3,8 +3,6 @@
 #include <QDir>
 #include <QProcess>
 
-#include <QDebug>
-
 Executor::Executor(QObject *parent) : QObject(parent)
 {
 
@@ -26,19 +24,10 @@ void Executor::executeIsolated(const QString &path)
 
 void Executor::startDetached(const QString &path, QStringList arguments)
 {
-    QString parentDir = getParentDirPath(path);
-
-    bool started = QProcess::startDetached(path, arguments, parentDir);
+    QFileInfo fi(path);
+    bool started = QProcess::startDetached(fi.absoluteFilePath(), arguments, fi.absolutePath());
     if (started)
         emit executed();
     else
         emit failure();
-}
-
-QString Executor::getParentDirPath(const QString &path)
-{
-    QFileInfo fi(path);
-    QString parentDir = fi.dir().path();
-
-    return parentDir;
 }

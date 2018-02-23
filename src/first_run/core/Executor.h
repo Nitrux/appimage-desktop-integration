@@ -19,7 +19,6 @@ public slots:
 
 private:
     void startDetached(const QString &path, QStringList arguments = {});
-    QString getParentDirPath(const QString &path);
 };
 
 #endif // EXECUTOR_H
