@@ -10,3 +10,4 @@ It allows:
 - To test the application by executing it once.
 - To trust (set executable permission to the file)
 
+![appimagekitr](https://raw.githubusercontent.com/azubieta/appimage-desktop-integration/screenshots/screenshots/first_run_unsecure_appimage.png)
