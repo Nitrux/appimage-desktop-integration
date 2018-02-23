@@ -1,23 +1,23 @@
-#include "HandleUnsecureAppimageDialog.h"
-#include "ui_HandleUnsecureAppimageDialog.h"
+#include "UnsecureAppimageDialog.h"
+#include "ui_UnsecureAppimageDialog.h"
 
 #include <QAction>
 #include <QMenu>
 
-HandleUnsecureAppimageDialog::HandleUnsecureAppimageDialog(QWidget *parent) :
+UnsecureAppimageDialog::UnsecureAppimageDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::HandleUnsecureAppimageDialog)
+    ui(new Ui::UnsecureAppimageDialog)
 {
     ui->setupUi(this);
     setupDeployOptionsMenu();
     setupRunOptionsMenu();
 }
 
-void HandleUnsecureAppimageDialog::setupDeployOptionsMenu()
+void UnsecureAppimageDialog::setupDeployOptionsMenu()
 {
     deploySystemAction = new QAction(QIcon(":/images/document-download.svg"),
                                      tr("Deploy System Wide"), this);
-    connect(deploySystemAction, &QAction::triggered, [=](){ emit deploySystemWide(); });
+    connect(deploySystemAction, &QAction::triggered, [=](){ emit deploySystemwide(path); });
     deploySystemAction->setEnabled(false);
 
     deployOptionsMenu = new QMenu(this);
@@ -26,11 +26,11 @@ void HandleUnsecureAppimageDialog::setupDeployOptionsMenu()
     ui->deployOptionsButton->setMenu(deployOptionsMenu);
 }
 
-void HandleUnsecureAppimageDialog::setupRunOptionsMenu()
+void UnsecureAppimageDialog::setupRunOptionsMenu()
 {
     runUnsecureAction = new QAction(QIcon(":/images/application-x-executable.svg"),
                                     tr("Run Unsecure"), this);
-    connect(runUnsecureAction, &QAction::triggered, [=](){ emit run(); });
+    connect(runUnsecureAction, &QAction::triggered, [=](){ emit run(path); });
 
     runOptionsMenu = new QMenu(this);
     runOptionsMenu->addAction(runUnsecureAction);
@@ -39,7 +39,7 @@ void HandleUnsecureAppimageDialog::setupRunOptionsMenu()
 }
 
 
-HandleUnsecureAppimageDialog::~HandleUnsecureAppimageDialog()
+UnsecureAppimageDialog::~UnsecureAppimageDialog()
 {
     delete ui;
 
@@ -49,17 +49,22 @@ HandleUnsecureAppimageDialog::~HandleUnsecureAppimageDialog()
     delete deploySystemAction;
 }
 
-void HandleUnsecureAppimageDialog::on_runButton_clicked()
+void UnsecureAppimageDialog::setAppimage(const QString &path)
 {
-    emit runIsolated();
+    UnsecureAppimageDialog::path = path;
 }
 
-void HandleUnsecureAppimageDialog::on_closeButton_clicked()
+void UnsecureAppimageDialog::on_runButton_clicked()
+{
+    emit runIsolated(path);
+}
+
+void UnsecureAppimageDialog::on_closeButton_clicked()
 {
     reject();
 }
 
-void HandleUnsecureAppimageDialog::on_deployButton_clicked()
+void UnsecureAppimageDialog::on_deployButton_clicked()
 {
-    emit deploy();
+    emit deployUserwide(path);
 }

@@ -2,8 +2,12 @@
 #include <QDesktopWidget>
 #include <QCommandLineParser>
 
-#include "FirstRun.h"
-#include "FirstRunUiController.h"
+#include "core/Validator.h"
+#include "core/Deployer.h"
+#include "core/Executor.h"
+
+#include "gui/UiController.h"
+
 
 QCommandLineParser *createCommandLineParser(const QCoreApplication &app);
 
@@ -15,33 +19,22 @@ int main(int argc, char **argv) {
     QCommandLineParser *parser = createCommandLineParser(app);
     const QStringList args = parser->positionalArguments();
 
-    FirstRunUiController *controller = nullptr;
-    FirstRun * firstRun = nullptr;
+    Validator validator;
+    Deployer deployer;
+    Executor executor;
+
+    UiController controller;
+
     if (!args.isEmpty()) {
         const QString target = args.first();
 
-        controller = new FirstRunUiController();
-        firstRun = new FirstRun(target);
+        validator.setAppimage(target);
 
-        QObject::connect(firstRun, &FirstRun::canceled, controller, &FirstRunUiController::close);
-        QObject::connect(firstRun, &FirstRun::completed, controller, &FirstRunUiController::close);
+        controller.setValidator(&validator);
+        controller.setDeployer(&deployer);
+        controller.setExecutor(&executor);
 
-        QObject::connect(firstRun, &FirstRun::opening, controller, &FirstRunUiController::showOpeningDialog);
-        QObject::connect(firstRun, &FirstRun::unrecognizedAppimageFormat, controller, &FirstRunUiController::showUnknownFileDialog);
-        QObject::connect(firstRun, &FirstRun::noSignature, controller, &FirstRunUiController::showNoSignatureDialog);
-        QObject::connect(controller, &FirstRunUiController::cancelRequested, firstRun, &FirstRun::cancel);
-
-        QObject::connect(controller, &FirstRunUiController::run, firstRun, &FirstRun::run);
-        QObject::connect(controller, &FirstRunUiController::runIsolated, firstRun, &FirstRun::runIsolated);
-        QObject::connect(controller, &FirstRunUiController::deploy, firstRun, &FirstRun::deploy);
-        QObject::connect(controller, &FirstRunUiController::deploySystemWide, firstRun, &FirstRun::deploySystemWide);
-
-
-        QObject::connect(firstRun, &FirstRun::deployStarted, controller, &FirstRunUiController::showDeployProgress);
-        QObject::connect(firstRun, &FirstRun::deployCompleted, controller, &FirstRunUiController::showDeployCompleteDialog);
-        QObject::connect(firstRun, &FirstRun::deployError, controller, &FirstRunUiController::showDeployErrorDialog);
-
-        firstRun->verify();
+        controller.exec();
     } else
         parser->showHelp(1);
 
@@ -51,10 +44,10 @@ int main(int argc, char **argv) {
 
 QCommandLineParser *createCommandLineParser(const QCoreApplication &app) {
     QCommandLineParser *parser = new QCommandLineParser();
-    parser->setApplicationDescription("AppImage verification and deployment utility");
+    parser->setApplicationDescription(QObject::tr("AppImage verification and deployment utility"));
     parser->addHelpOption();
 
-    parser->addPositionalArgument("appimage", "The AppImage file to execute.");
+    parser->addPositionalArgument("appimage", QObject::tr("The AppImage file to execute."));
     parser->process(app);
     return parser;
 }
