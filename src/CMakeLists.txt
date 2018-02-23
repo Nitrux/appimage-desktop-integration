@@ -1,5 +1,5 @@
 # LibAppimage
-include(../external_projects/libappimage.cmake)
+include(../external-projects/libappimage.cmake)
 install(FILES ${libappimage_PATH} DESTINATION lib)
 
 # Qt
