@@ -8,12 +8,12 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install qt59base librsvg2-bin
+  - sudo apt-get -y install qt59base librsvg2-bin libfuse-dev
   - source /opt/qt*/bin/qt*-env.sh
 
 script:
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr .
-  - find .
+  - cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
+  - make -j$(nproc)
   - ./build-scripts/build-appimage.sh
 
 after_success:
