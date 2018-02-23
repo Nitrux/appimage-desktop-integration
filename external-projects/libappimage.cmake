@@ -6,6 +6,7 @@ ExternalProject_Add(AppImageKit
     GIT_REPOSITORY https://github.com/AppImage/AppImageKit.git
     GIT_TAG appimagetool/master
     GIT_SUBMODULES ""
+    CONFIGURE_COMMAND ${CMAKE_COMMAND} -G${CMAKE_GENERATOR} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} <SOURCE_DIR>
     BUILD_COMMAND make gtest libappimage
     INSTALL_COMMAND make install DESTDIR=<INSTALL_DIR>
     )
