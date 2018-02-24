@@ -20,7 +20,7 @@ script:
   - ./build-scripts/build-appimage.sh
 
 after_success:
-  - curl --upload-file appimage-first-run-git.deb
+  - curl --upload-file appimage-first-run.deb
 
 branches:
   except:
