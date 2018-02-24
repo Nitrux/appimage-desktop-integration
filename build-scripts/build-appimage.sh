@@ -15,7 +15,7 @@ echo "
 Package: appimage-desktop-integration
 Architecture: amd64
 Maintainer: Luis Lavaire
-Depends: 
+Depends: qt5
 Priority: optional
 Version: 0.1
 Description: AppImage integration with the desktop.

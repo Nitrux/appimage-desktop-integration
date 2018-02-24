@@ -20,6 +20,9 @@ script:
   - ./build-scripts/build-appimage.sh
 
 after_success:
+  - curl --upload-file Appimage_First_Run_Utility*.AppImage* https://transfer.sh/appimage-first-run-git.$(git rev-parse --short HEAD)-x86_64.AppImage
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - sh ./upload.sh Appimage_First_Run_Utility*.AppImage*
   - find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
   - curl --upload-file appimage-first-run.deb https://transfer.sh
 
