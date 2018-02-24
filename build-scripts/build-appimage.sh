@@ -3,17 +3,19 @@
 build_scripts_dir=`dirname $0`
 source_dir=`dirname $build_scripts_dir`
 
-make DESTDIR="appdir" -j$(nproc) install
-find appdir/
+mkdir -p appimage-desktop-integration/DEBIAN
+make DESTDIR="appimage-desktop-integration/" -j $(nproc) install
 
-rsvg-convert -f png -h 256 -w 256 ${source_dir}/res/images/appimage.svg > appdir/appimage.png
+echo "
+Package: appimage-desktop-integration
+Architecture: amd64
+Maintainer: Luis Lavaire
+Depends: 
+Priority: optional
+Version: 0.1
+Description: AppImage integration with the desktop.
+" > appimage-desktop-integration/DEBIAN/control
 
-wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt-continuous-x86_64.AppImage
-chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+chown -R root:root appimage-desktop-integration/
 
-
-unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-export VERSION=$(git rev-parse --short HEAD) # linuxdeployqt uses this for naming the file
-
-FIRST_RUN_DESKTOP_FILE=$(find appdir/usr/ -iname '*first*run*.desktop')
-./linuxdeployqt-continuous-x86_64.AppImage ${FIRST_RUN_DESKTOP_FILE} -bundle-non-qt-libs -appimage
+dpkg-deb --build deb/
