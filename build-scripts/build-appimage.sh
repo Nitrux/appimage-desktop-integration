@@ -18,4 +18,4 @@ Description: AppImage integration with the desktop.
 
 chown -R root:root appimage-desktop-integration/
 
-dpkg-deb --build deb/
+dpkg-deb --build appimage-desktop-integration/
