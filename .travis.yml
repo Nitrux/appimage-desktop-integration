@@ -20,7 +20,8 @@ script:
   - ./build-scripts/build-appimage.sh
 
 after_success:
-  - curl --upload-file appimage-first-run.deb
+  - find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
+  - curl --upload-file appimage-first-run.deb https://transfer.sh
 
 branches:
   except:
