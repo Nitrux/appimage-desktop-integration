@@ -1,6 +1,6 @@
 language: cpp
 compiler: gcc
-sudo: require
+sudo: required
 dist: trusty
 
 notifications:
@@ -16,7 +16,7 @@ install:
 
 script:
   - cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
-  - make -j$(nproc)
+  - make -j $(nproc)
   - sh ./build-scripts/build-appimage.sh
   - sh ./build-scripts/build-deb.sh
 
@@ -25,7 +25,7 @@ after_success:
   - curl --upload-file Appimage_First_Run_Utility*.AppImage* https://transfer.sh/appimage-first-run-git.$(git rev-parse --short HEAD)-x86_64.AppImage
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
   - bash upload.sh Appimage_First_Run_Utility*.AppImage*
-  - curl --upload-file appimage-first-run.deb https://transfer.sh
+  - curl --upload-file appimage-desktop-integration.deb https://transfer.sh
 
 branches:
   except:

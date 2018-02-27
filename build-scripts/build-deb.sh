@@ -13,5 +13,5 @@ Version: 0.1
 Description: AppImage integration with the desktop.
 " > appimage-desktop-integration/DEBIAN/control
 
-chown -R root:root appimage-desktop-integration/
+sudo chown -R root:root appimage-desktop-integration/
 dpkg-deb --build appimage-desktop-integration/
