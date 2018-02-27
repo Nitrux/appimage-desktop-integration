@@ -5,12 +5,7 @@ find_package(Qt5 COMPONENTS Gui Widgets)
 
 add_executable(appimage_first_run
     main.cpp
-    core/Validator.h
-    core/Validator.cpp
-    core/Deployer.h
-    core/Deployer.cpp
-    core/Executor.h
-    core/Executor.cpp
+    $<TARGET_OBJECTS:user_apps_monitor_core>
     gui/ValidationDialog.h
     gui/ValidationDialog.cpp
     gui/ValidationDialog.ui
@@ -24,7 +19,10 @@ add_executable(appimage_first_run
     gui/DeploymentDialog.ui
     ../../res/res.qrc)
 
-target_include_directories(appimage_first_run PRIVATE ${libappimage_INCLUDE_DIRECTORIES})
+target_include_directories(appimage_first_run PRIVATE
+    PRIVATE ${CMAKE_SOURCE_DIR}/src/core
+    ${libappimage_INCLUDE_DIRECTORIES}
+    )
 
 target_link_libraries(appimage_first_run libappimage Qt5::Core Qt5::Gui Qt5::Widgets)
 

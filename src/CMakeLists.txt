@@ -9,4 +9,6 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Core)
 
 # Targets
+add_subdirectory(core)
 add_subdirectory(first_run)
+add_subdirectory(user_apps_monitor)
