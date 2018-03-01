@@ -2,9 +2,9 @@
 #include <QDesktopWidget>
 #include <QCommandLineParser>
 
-#include "core/Validator.h"
-#include "core/Deployer.h"
-#include "core/Executor.h"
+#include <Validator.h>
+#include <Deployer.h>
+#include <Executor.h>
 
 #include "gui/UiController.h"
 

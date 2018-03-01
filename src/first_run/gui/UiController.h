@@ -8,9 +8,9 @@
 #include <QObject>
 #include <QStackedWidget>
 
-#include "core/Validator.h"
-#include "core/Deployer.h"
-#include "core/Executor.h"
+#include <Validator.h>
+#include <Deployer.h>
+#include <Executor.h>
 
 #include "gui/ValidationDialog.h"
 #include "gui/UnsecureAppimageDialog.h"
