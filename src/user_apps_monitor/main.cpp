@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
 
     watcher.addPaths(watchPaths);
 
-    Registry r;
+    Registry r();
 
     return app.exec();
 }

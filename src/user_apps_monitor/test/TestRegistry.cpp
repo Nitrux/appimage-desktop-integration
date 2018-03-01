@@ -19,7 +19,7 @@ namespace NX_SOFTWARE_CENTER_TESTS {
 
     TEST_F(TestRegistry, getHashFromPath) {
         auto path = "/some/place/appimagekit_e660685f087766d437de39ef24d9d64c-echo.desktop";
-        auto result = Registry::getGetHashFromPath(path);
+        auto result = Registry::extractHashFromDesktopIntegrationFile(path);
 
         ASSERT_EQ("e660685f087766d437de39ef24d9d64c", result.toLocal8Bit());
     }
@@ -55,9 +55,23 @@ namespace NX_SOFTWARE_CENTER_TESTS {
         }
     }
 
-//    TEST_F(TestRegistry, ) {
-//
-//    }
+    TEST_F(TestRegistry, getApplicationsWithoutDesktopIntegration) {
+        const QStringList list = registry.getApplicationsWithoutDesktopIntegration();
+        const auto expected = QStringList({TEST_DATA_DIR"appimages/echo-x86_64-8.25.AppImage"});
+
+        ASSERT_FALSE(list.isEmpty());
+        ASSERT_EQ(expected, list);
+    }
+
+    TEST_F(TestRegistry, getOrphanDesktopIntegrationFiles) {
+        const auto list = registry.getOrphanDesktopIntegrationFiles();
+        const QStringList expected = {
+                TEST_DATA_DIR"applications/appimagekit_e660685f087766d437de39ef24d9d64c-echo.desktop",
+                TEST_DATA_DIR"icons/appimagekit_e660685f087766d437de39ef24d9d64c_utilities-terminal.svg"};
+
+        ASSERT_FALSE(list.isEmpty());
+        ASSERT_EQ(expected, list);
+    }
 }
 
 

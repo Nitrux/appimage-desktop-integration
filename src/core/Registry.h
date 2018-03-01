@@ -11,6 +11,7 @@ class Registry : public QObject
     Q_OBJECT
     QStringList dataLocations;
     QStringList appimagesLocations;
+
 public:
     explicit Registry(QObject *parent = nullptr);
 
@@ -21,12 +22,22 @@ public:
     QStringList getIconsPaths();
     QStringList getAppimagesPaths();
 
-    static QString getGetHashFromPath(const QString &entry);
+    QStringList getApplicationsWithoutDesktopIntegration();
+    QStringList getOrphanDesktopIntegrationFiles();
+
+    static QString extractHashFromDesktopIntegrationFile(const QString &entry);
+
 private:
     QSet<QString> getDeployedAppimageHashes();
 
     QSet<QString> getHashesFromPaths(QStringList entries);
     QStringList getEntriesAbsolutePaths(QDir d, const QStringList &filters);
+
+    bool isDeployed(const QSet<QString> &deployedAppimagesHashes, const QString &path) const;
+
+    QSet<QString> getAppimageHashes(const QStringList &appimages) const;
+
+    QStringList extractOrphanFiles(const QSet<QString> &hashes, const QStringList &desktopEntries) const;
 };
 
 #endif // REGISTRY_H

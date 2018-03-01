@@ -5,6 +5,8 @@
 
 #include <appimage/appimage.h>
 
+#include <QSettings>
+
 Registry::Registry(QObject *parent) : QObject(parent)
 {
     dataLocations = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
@@ -61,12 +63,12 @@ QSet<QString> Registry::getHashesFromPaths(QStringList entries)
 {
     QSet<QString> hashes;
     for (const QString &entry: entries)
-        hashes << getGetHashFromPath(entry);
+        hashes << extractHashFromDesktopIntegrationFile(entry);
 
     return hashes;
 }
 
-QString Registry::getGetHashFromPath(const QString &entry) { return entry.section("/", -1).mid(12, 32); }
+QString Registry::extractHashFromDesktopIntegrationFile(const QString &entry) { return entry.section("/", -1).mid(12, 32); }
 
 QStringList Registry::getEntriesAbsolutePaths(QDir d, const QStringList &filters)
 {
@@ -102,4 +104,58 @@ QStringList Registry::getAppimagesPaths() {
     }
 
     return entries;
+}
+
+QStringList Registry::getApplicationsWithoutDesktopIntegration() {
+    const auto appimages = getAppimagesPaths();
+    const auto deployedAppimagesHashes = getDeployedAppimageHashes();
+
+    QStringList list;
+    for (const QString &path: appimages) {
+        if (!isDeployed(deployedAppimagesHashes, path))
+            list.append(path);
+    }
+
+    return list;
+}
+
+bool Registry::isDeployed(const QSet<QString> &deployedAppimagesHashes, const QString &path) const {
+    const QString hash = get_md5(path.toStdString().c_str());
+    bool deployed = deployedAppimagesHashes.contains(hash);
+    return deployed;
+}
+
+QStringList Registry::getOrphanDesktopIntegrationFiles() {
+    const auto appimages = getAppimagesPaths();
+    const auto hashes = getAppimageHashes(appimages);
+
+    QStringList desktopEntries = getDesktopEntriesPaths();
+    QStringList icons = getIconsPaths();
+
+    QStringList list;
+    list << extractOrphanFiles(hashes, desktopEntries);
+    list << extractOrphanFiles(hashes, icons);
+
+    return list;
+}
+
+QStringList Registry::extractOrphanFiles(const QSet<QString> &hashes, const QStringList &desktopEntries) const {
+    QStringList list;
+
+    for (const QString &path: desktopEntries) {
+        auto hash = extractHashFromDesktopIntegrationFile(path);
+        if (!hashes.contains(hash)) {
+            list << path;
+        }
+    }
+    return list;
+}
+
+QSet<QString> Registry::getAppimageHashes(const QStringList &appimages) const {
+    QSet<QString> hashes;
+    for (const QString &path: appimages) {
+        const QString hash =  get_md5(path.toStdString().c_str());
+        hashes.insert(hash);
+    }
+    return hashes;
 }

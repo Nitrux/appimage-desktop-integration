@@ -5,7 +5,7 @@ find_package(Qt5 COMPONENTS Gui Widgets)
 
 add_executable(appimage_first_run
     main.cpp
-    $<TARGET_OBJECTS:user_apps_monitor_core>
+    $<TARGET_OBJECTS:appimage_dektop_integration>
     gui/ValidationDialog.h
     gui/ValidationDialog.cpp
     gui/ValidationDialog.ui

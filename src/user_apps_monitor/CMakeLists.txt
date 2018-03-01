@@ -5,7 +5,7 @@ find_package(Qt5 COMPONENTS Gui Widgets)
 
 add_executable(user_apps_monitor
     main.cpp
-    $<TARGET_OBJECTS:user_apps_monitor_core>)
+    $<TARGET_OBJECTS:appimage_dektop_integration>)
 
 target_include_directories(user_apps_monitor
     PRIVATE ${libappimage_INCLUDE_DIRECTORIES}

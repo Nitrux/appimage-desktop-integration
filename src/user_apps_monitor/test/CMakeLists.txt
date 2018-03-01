@@ -3,7 +3,7 @@ enable_testing()
 include(../../../external-projects/gtest.cmake)
 
 add_executable(user_apps_monitor_tests
-    $<TARGET_OBJECTS:user_apps_monitor_core>
+    $<TARGET_OBJECTS:appimage_dektop_integration>
 
     main.cpp
     TestRegistry.cpp

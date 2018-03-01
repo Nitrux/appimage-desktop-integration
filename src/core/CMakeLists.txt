@@ -1,4 +1,4 @@
-add_library(user_apps_monitor_core OBJECT
+add_library(appimage_dektop_integration OBJECT
     Registry.h
     Registry.cpp
     Validator.h
@@ -9,7 +9,7 @@ add_library(user_apps_monitor_core OBJECT
     Executor.cpp
     )
 
-target_compile_options(user_apps_monitor_core PUBLIC -fPIC -fexceptions)
-target_include_directories(user_apps_monitor_core PUBLIC
+target_compile_options(appimage_dektop_integration PUBLIC -fPIC -fexceptions)
+target_include_directories(appimage_dektop_integration PUBLIC
     ${libappimage_INCLUDE_DIRECTORIES}
     ${Qt5Core_INCLUDE_DIRS} )
