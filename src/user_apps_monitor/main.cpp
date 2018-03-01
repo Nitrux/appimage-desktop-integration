@@ -5,8 +5,11 @@
 #include <QDir>
 #include <QCoreApplication>
 #include <QFileSystemWatcher>
+#include <QStandardPaths>
 
-#include "Registry.h"
+#include <Registry.h>
+#include "Monitor.h"
+#include "Deployer.h"
 
 int main(int argc, char **argv) {
     QCoreApplication app(argc, argv);
@@ -20,7 +23,17 @@ int main(int argc, char **argv) {
 
     watcher.addPaths(watchPaths);
 
-    Registry r();
+    Registry r;
+    r.setDataLocations(QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation));
+    r.setAppimageLocations(watchPaths);
 
+    Monitor m;
+    m.setRegistry(&r);
+    m.setWatcher(&watcher);
+
+    m.sanitizeMenuEntries();
+    m.deployMissingEntries();
+
+    m.startWatch();
     return app.exec();
 }
