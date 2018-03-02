@@ -6,7 +6,7 @@ source_dir=`dirname $build_scripts_dir`
 make DESTDIR="appdir" -j$(nproc) install
 find appdir/
 
-rsvg-convert -f png -h 256 -w 256 ${source_dir}/res/images/appimage.svg > appdir/appimage.png
+rsvg-convert -f png -h 256 -w 256 ${source_dir}/res/images/appimage.svg > appdir/usr/appimage.png
 
 wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt-continuous-x86_64.AppImage
 chmod a+x linuxdeployqt-continuous-x86_64.AppImage
