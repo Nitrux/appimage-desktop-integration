@@ -11,3 +11,5 @@ Categories=System;
 
 Name=Appimage First Run Utility
 Comment=First run utility to verify and deploy desktop integration files for Appimages.
+
+NoDisplay=true
