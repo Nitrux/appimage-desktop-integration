@@ -1,6 +1,6 @@
 enable_testing()
 
-include(../../../external-projects/gtest.cmake)
+include(../../../third-party/gtest.cmake)
 
 add_executable(core_tests
     $<TARGET_OBJECTS:appimage_dektop_integration>
