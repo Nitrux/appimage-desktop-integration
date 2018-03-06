@@ -17,5 +17,3 @@ target_link_libraries(user_apps_monitor libappimage Qt5::Core)
 add_dependencies(user_apps_monitor libappimage)
 
 install(TARGETS user_apps_monitor RUNTIME DESTINATION bin)
-
-add_subdirectory(test)

@@ -2,24 +2,24 @@ enable_testing()
 
 include(../../../external-projects/gtest.cmake)
 
-add_executable(user_apps_monitor_tests
+add_executable(core_tests
     $<TARGET_OBJECTS:appimage_dektop_integration>
 
     main.cpp
     TestRegistry.cpp
     )
 
-target_include_directories(user_apps_monitor_tests
+target_include_directories(core_tests
     PRIVATE ${CMAKE_SOURCE_DIR}/src/core
     private ${gtest_INCLUDE_DIRS}
     PRIVATE ${Qt5Core_INCLUDE_DIRS}
     )
 
-target_compile_definitions(user_apps_monitor_tests
+target_compile_definitions(core_tests
     PRIVATE TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data/"
     )
 
-target_link_libraries(user_apps_monitor_tests
+target_link_libraries(core_tests
     libappimage
     Qt5::Core
 
@@ -27,4 +27,6 @@ target_link_libraries(user_apps_monitor_tests
     pthread # this must be last else it fails at linking
     )
 
-add_dependencies(user_apps_monitor_tests gtest)
+add_dependencies(core_tests gtest)
+
+add_test(core_tests core_tests)
