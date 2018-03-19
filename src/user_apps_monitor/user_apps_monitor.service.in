@@ -1,0 +1,8 @@
+[Unit]
+Description=Monitors appimage files at $HOME/Applications and /opt/applications to create or remove the required desktop integration files.
+
+[Service]
+ExecStart=/home/username1/tg/bin/telegram-cli -d -vvvv -P 2391 -L /var/log/telegram-daemon/telegram-cli.log
+
+[Install]
+WantedBy=default.target

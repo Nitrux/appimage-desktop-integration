@@ -15,3 +15,5 @@ target_include_directories(appimage_dektop_integration PUBLIC
     ${Qt5Core_INCLUDE_DIRS} )
 
 add_subdirectory(test)
+
+add_dependencies(appimage_dektop_integration libappimage)

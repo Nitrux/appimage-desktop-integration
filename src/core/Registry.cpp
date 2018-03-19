@@ -93,7 +93,7 @@ QStringList Registry::getAppimagesPaths() {
         if (d.exists()) {
             for (const QString &entry : d.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
                 const QString path = d.absoluteFilePath(entry);
-                int type = check_appimage_type(path.toStdString().c_str(), false);
+                int type = appimage_get_type(path.toStdString().c_str(), false);
                 if (type > 0)
                     entries << path;
             }
@@ -120,7 +120,7 @@ QStringList Registry::getApplicationsWithoutDesktopIntegration() {
 }
 
 bool Registry::isDeployed(const QSet<QString> &deployedAppimagesHashes, const QString &path) const {
-    const QString hash = get_md5(path.toStdString().c_str());
+    const QString hash = appimage_get_md5(path.toStdString().c_str());
     bool deployed = deployedAppimagesHashes.contains(hash);
     return deployed;
 }
@@ -154,7 +154,7 @@ QStringList Registry::extractOrphanFiles(const QSet<QString> &hashes, const QStr
 QSet<QString> Registry::getAppimageHashes(const QStringList &appimages) const {
     QSet<QString> hashes;
     for (const QString &path: appimages) {
-        const QString hash =  get_md5(path.toStdString().c_str());
+        const QString hash =  appimage_get_md5(path.toStdString().c_str());
         hashes.insert(hash);
     }
     return hashes;
