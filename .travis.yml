@@ -17,13 +17,13 @@ install:
 script:
   - cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
   - make -j$(nproc)
-  - ./packaging/build-appimage.sh
+  - cpack
 
 after_success:
-  - find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
-  - curl --upload-file Appimage_First_Run_Utility*.AppImage* https://transfer.sh/appimage-first-run-git.$(git rev-parse --short HEAD)-x86_64.AppImage
+  - curl --upload-file *first-run*.deb https://transfer.sh/
+  - curl --upload-file *user-apps-monitor*.deb https://transfer.sh/
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh Appimage_First_Run_Utility*.AppImage*
+  - bash upload.sh apppimage-desktop-integration*deb
 
 branches:
   except:
