@@ -28,5 +28,5 @@ target_link_libraries(appimage_first_run libappimage Qt5::Core Qt5::Gui Qt5::Wid
 
 add_dependencies(appimage_first_run libappimage)
 
-install(TARGETS appimage_first_run RUNTIME DESTINATION bin)
-install(FILES org.appimage.first.run.desktop DESTINATION share/applications)
+install(TARGETS appimage_first_run RUNTIME DESTINATION bin COMPONENT first-run)
+install(FILES org.appimage.first_run.desktop DESTINATION share/applications COMPONENT first-run)
