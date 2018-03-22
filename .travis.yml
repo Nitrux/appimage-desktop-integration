@@ -10,7 +10,7 @@ addons:
     - sourceline: 'ppa:beineri/opt-qt-5.10.1-trusty'
     - sourceline: 'deb http://ftp.de.debian.org/debian/ jessie main contrib non-free'
     packages:
-    - qt59base
+    - qt510base
     - librsvg2-bin
     - libfuse-dev
     - desktop-file-utils
