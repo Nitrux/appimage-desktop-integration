@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Exec=appimage-desktop-integration-config
+TryExec=appimage-desktop-integration-config
+
+Icon=appimage
+
+Categories=System;
+
+Name=Appimage Desktop Integration Tool
+Comment=Verify and deploy Appimages files in your system by means of a first run wizard or just by coping them to $HOME/Applications.

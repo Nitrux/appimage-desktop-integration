@@ -18,12 +18,13 @@ script:
   - cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
   - make -j$(nproc)
   - cpack
+  - pack/create_appimage.sh
 
 after_success:
   - curl --upload-file *first-run*.deb https://transfer.sh/
   - curl --upload-file *user-apps-monitor*.deb https://transfer.sh/
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh apppimage-desktop-integration*deb
+  - bash upload.sh apppimage-desktop-integration*deb Appimage_Desktop_Integration_Tool-*.AppImage*
 
 branches:
   except:

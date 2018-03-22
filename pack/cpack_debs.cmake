@@ -32,7 +32,6 @@ set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
 
-
 set(CPACK_DEBIAN_FIRST-RUN_PACKAGE_DEPENDS "libqt5core5a, libqt5widgets5, libappimage, libarchive13, libc6 (>= 2.4), libglib2.0-0, zlib1g, fuse")
 set(CPACK_COMPONENT_FIRST-RUN_DESCRIPTION "First run utility\n Use it to handle newly downloaded appimages. Allow to verify and deploy desktop integration files.")
 
@@ -42,7 +41,7 @@ set(CPACK_COMPONENT_USER-APPS-MONITOR_DESCRIPTION "
     Monitor appimage files.\n Monitor appimage files in HOME/Applications and /opt/applications to create or remove proper desktop integration files.")
 
 
-set(CPACK_COMPONENTS_ALL first-run user-apps-monitor)
+set(CPACK_COMPONENTS_ALL first-run user-apps-monitor config)
 set(CPACK_DEB_COMPONENT_INSTALL ON)
 
 include(CPack)

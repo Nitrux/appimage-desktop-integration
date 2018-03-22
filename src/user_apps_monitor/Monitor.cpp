@@ -7,6 +7,7 @@
 
 #include <appimage/appimage.h>
 #include <Registry.h>
+#include <QtCore/QProcess>
 #include "Monitor.h"
 
 void Monitor::setRegistry(Registry *registry) {
