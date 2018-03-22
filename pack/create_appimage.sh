@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+build_scripts_dir=`dirname $0`
+source_dir=`dirname $build_scripts_dir`
+
 DESTDIR=appdir make install
-cp ../res/images/appimage.svg appdir
+cp ${source_dir}/res/images/appimage.svg appdir
+
 patchelf --set-rpath '$ORIGIN/../lib/' appdir/usr/bin/appimage_first_run
 patchelf --set-rpath '$ORIGIN/../lib/' appdir/usr/bin/user_apps_monitor
 
