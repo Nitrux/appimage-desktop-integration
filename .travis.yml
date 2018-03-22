@@ -3,18 +3,24 @@ compiler: gcc
 sudo: required
 dist: trusty
 
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - sourceline: 'ppa:beineri/opt-qt-5.10.1-trusty'
+    - sourceline: 'deb http://ftp.de.debian.org/debian/ jessie main contrib non-free'
+    packages:
+    - qt59base
+    - librsvg2-bin
+    - libfuse-dev
+    - desktop-file-utils
+    - patchelf
+
 notifications:
   email: false
 
-before_install:
-  - sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
-  - sudo apt-get update -qq
-
-install:
-  - sudo apt-get -y install qt59base librsvg2-bin libfuse-dev desktop-file-utils
-  - source /opt/qt*/bin/qt*-env.sh
-
 script:
+  - source /opt/qt*/bin/qt*-env.sh
   - cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
   - make -j$(nproc)
   - cpack
