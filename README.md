@@ -63,3 +63,9 @@ It allows:
 
 Aims to allow simple integration of appimages by monitoring a "desktop integrated" Applications dir, where 
 the user can just copy the applications that she/he want to have available from menus and as mime-type handler. 
+
+## AppImage Desktop Integration configuration ui
+
+Provides a simple interface to deploy and monitor the above tools.
+
+![appimagekitr](https://github.com/azubieta/appimage-desktop-integration/blob/screenshots/screenshots/config.png?raw=true)
