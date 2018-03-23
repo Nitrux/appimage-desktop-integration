@@ -8,5 +8,5 @@ Icon=appimage
 
 Categories=System;
 
-Name=Appimage Desktop Integration Tool
-Comment=Verify and deploy Appimages files in your system by means of a first run wizard or just by coping them to $HOME/Applications.
+Name=AppImage Desktop Integration Tool
+Comment=Verify and deploy AppImages files in your system by means of a first run wizard or just by coping them to $HOME/Applications.

@@ -8,7 +8,7 @@ Icon=appimage
 
 Categories=System;
 
-Name=Appimage User Applications Monitor
-Comment="Monitor appimage files in HOME/Applications and /opt/applications to create or remove proper desktop integration files."
+Name=AppImage User Applications Monitor
+Comment="Monitor AppImage files in HOME/Applications and /opt/applications to create or remove proper desktop integration files."
 
 NoDisplay=true

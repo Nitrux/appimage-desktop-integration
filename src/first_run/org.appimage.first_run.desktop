@@ -9,7 +9,7 @@ Icon=appimage
 MimeType=application/x-iso9660-appimage;application/vnd.appimage;
 Categories=System;
 
-Name=Appimage First Run Utility
-Comment=First run utility to verify and deploy desktop integration files for Appimages.
+Name=AppImage First Run Utility
+Comment=First run utility to verify and deploy desktop integration files for AppImages.
 
 NoDisplay=true
