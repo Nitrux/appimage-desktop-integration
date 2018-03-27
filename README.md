@@ -1,4 +1,4 @@
-# Appimage Desktop Integration Tools [![Build Status](https://travis-ci.org/azubieta/appimage-desktop-integration.svg?branch=master)](https://travis-ci.org/azubieta/appimage-desktop-integration)
+# Appimage Desktop Integration Tools [![Build Status](https://travis-ci.org/nomad-desktop/appimage-desktop-integration.svg?branch=master)](https://travis-ci.org/nomad-desktop/appimage-desktop-integration)
 
 Optional set of tools to assist users at verifying, activating, installing and removing applications packed as appimage.
 
