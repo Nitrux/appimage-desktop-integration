@@ -65,3 +65,8 @@ the users can just copy the applications that they'd want and have them availabl
 Provides a simple interface to deploy and monitor the mentioned tools.
 
 ![appimagekitr](https://github.com/azubieta/appimage-desktop-integration/blob/screenshots/screenshots/config.png?raw=true)
+
+# Issues
+If you find problems with the contents of this repository please create an issue.
+
+©2018 Nitrux Latinoamericana S.C.
