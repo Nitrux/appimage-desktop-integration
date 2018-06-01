@@ -61,8 +61,8 @@ QCommandLineParser *createCommandLineParser(const QCoreApplication &app) {
     parser->addHelpOption();
 
     parser->addOption({{"c", "config"}, "Show configuration dialog"});
-    parser->addOption({{"m", "monitor"}, "Watch appimge files at $HOME/Applications and /opt/Applications"});
-    parser->addOption({{"o", "open"}, "Open the appimage file at <path>.", "path"});
+    parser->addOption({{"m", "monitor"}, "Watch AppImage files at $HOME/Applications and /opt/Applications"});
+    parser->addOption({{"o", "open"}, "Open the AppImage file at <path>.", "path"});
 
 
     parser->process(app);
