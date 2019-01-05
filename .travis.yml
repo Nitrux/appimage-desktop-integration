@@ -2,37 +2,34 @@ language: cpp
 compiler: gcc
 sudo: required
 dist: trusty
-
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - sourceline: 'ppa:beineri/opt-qt-5.10.1-trusty'
-    - sourceline: 'deb http://ftp.de.debian.org/debian/ jessie main contrib non-free'
+    - sourceline: ppa:beineri/opt-qt-5.10.1-trusty
+    - sourceline: deb http://ftp.de.debian.org/debian/ jessie main contrib non-free
     packages:
     - qt510base
     - librsvg2-bin
     - libfuse-dev
     - desktop-file-utils
     - patchelf
-
 notifications:
   email: false
-
+  slack:
+    secure: srgFCmnctYePogQx1BtGM1Kk4pX4A5t0fBBE/3zvxY78bYS17QiNXvHaCkl6+n+xwKU8WkPeFT1mnSEond0QmAnjPVKMLZDnOzrBwkGm6zWVrxsMolJ7dG6IcPftiwbtK8pLZvnOGy63MrVqsrcZ5kfR4UcDeim1iaScDviFo6O/YDbyNhkq65JiwULembDqsCzJ9Vqqcc4dMsbtCSfJJh+L1dEbOhKEEhdLSuDoDKeAEg2TKaBY5aZr1hxZstepkFs7AkeEm6Ys6d07Z10klJgnaDSPQBSIyGiq42NOXgHpJyUAOXbHg2H1H7qWm++3dJOhYhKJwM+wfDWXVUcklDFYrgPDIdi4Y/9L7Jgyncc1qMg3xV5tGGg+3mWors9tlvLOPFEYLWvK413LeeTsbOZDdIWpSLtil+8eNLKd2rRVDLPobw1K8Vru4zE4yJU/D+TG4b+st27yIgc95zbA6fMJ78k72+y8ko2Sl3HXvVdRP1XAf1QmiZnxkIjo1ebPd4w3O5qbfcNxmRE3pcLmCzvyrNioCmZLipc7XJCCyGyPWH3EBLDvwhdqg3oUpHD3UOVkq5MDoA58vlvJwfD/SQEadXI/8vCliep6ehFFLDgZiiUcXHkFI5+NKFZRGG+jns9rM3r0BeJraZHJh6byqF2tEF5r+8uQvFMjiYgQNgQ=
 script:
-  - source /opt/qt*/bin/qt*-env.sh
-  - cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
-  - make -j$(nproc)
-  - cpack
-  - pack/create_appimage.sh
-
+- source /opt/qt*/bin/qt*-env.sh
+- cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
+- make -j$(nproc)
+- cpack
+- pack/create_appimage.sh
 after_success:
-  - curl --upload-file *first-run*.deb https://transfer.sh/
-  - curl --upload-file *user-apps-monitor*.deb https://transfer.sh/
-  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh apppimage-desktop-integration*deb AppImage_Desktop_Integration_Tool-*.AppImage*
-
+- curl --upload-file *first-run*.deb https://transfer.sh/
+- curl --upload-file *user-apps-monitor*.deb https://transfer.sh/
+- wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+- bash upload.sh apppimage-desktop-integration*deb AppImage_Desktop_Integration_Tool-*.AppImage*
 branches:
   except:
-    - # Do not build tags that we create when we upload to GitHub Releases
-    - /^(?i:continuous)/
+  - 
+  - "/^(?i:continuous)/"
